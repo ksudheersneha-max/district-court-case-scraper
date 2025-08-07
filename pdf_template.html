@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { font-family: Arial, sans-serif; font-size: 14px; }
+    h1 { text-align: center; color: #444; }
+    .section { margin: 20px 0; }
+    .label { font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Court Case Result</h1>
+  <div class="section"><span class="label">Petitioner:</span> {{ result.petitioner }}</div>
+  <div class="section"><span class="label">Respondent:</span> {{ result.respondent }}</div>
+  <div class="section"><span class="label">Next Hearing Date:</span> {{ result.next_hearing }}</div>
+</body>
+</html>

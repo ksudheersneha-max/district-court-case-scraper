@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Court Case Dashboard</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #e0e0e0;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar {
+      background-color: #1f1f1f;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .navbar h1 {
+      color: #00acc1;
+      font-size: 24px;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 40px auto;
+      background-color: #1f1f1f;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+    }
+
+    h2 {
+      text-align: center;
+      color: #00acc1;
+      margin-bottom: 30px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #aaa;
+      font-weight: 600;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      background-color: #2c2c2c;
+      border: 1px solid #444;
+      border-radius: 6px;
+      color: #fff;
+    }
+
+    .captcha-container {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .captcha-container img {
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #00acc1;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .error {
+      background-color: #ff5252;
+      color: white;
+      padding: 10px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 20px;
+      color: #666;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <h1>Court Case Dashboard</h1>
+  </div>
+
+  <div class="container">
+    <h2>Search Court Case</h2>
+
+    {% if error %}
+      <div class="error">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST">
+      {% csrf_token %}
+      <label>Case Type</label>
+      <input type="text" name="case_type" placeholder="e.g. C, CR, A" required>
+
+      <label>Case Number</label>
+      <input type="text" name="case_number" placeholder="e.g. 123" required>
+
+      <label>Filing Year</label>
+      <input type="text" name="filing_year" placeholder="e.g. 2023" required>
+
+      {% if captcha_img %}
+      <div class="captcha-container">
+        <label for="captcha">CAPTCHA</label><br>
+        <img src="data:image/png;base64,{{ captcha_img }}" alt="CAPTCHA Image"><br><br>
+        <input type="text" name="captcha" placeholder="Enter CAPTCHA" required>
+      </div>
+      {% endif %}
+
+      <button type="submit">Search</button>
+    </form>
+  </div>
+</body>
+</html>
